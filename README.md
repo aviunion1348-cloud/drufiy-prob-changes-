@@ -14,6 +14,30 @@ something isn't in that file, treat it as undecided, not assumed.
 
 ---
 
+## Install from git — quick start
+
+```bash
+git clone https://github.com/aviunion1348-cloud/drufiy-prob-changes-.git
+cd drufiy-prob-changes-
+python3 -m venv .venv && source .venv/bin/activate   # Python 3.10+
+pip install -e ".[dev]"                              # CLI + desktop backend + test deps
+cp .env.example .env                                 # fill in one model key
+                                                     # (DEEPSEEK_API_KEY or KIMI_API_KEY)
+
+# terminal 1 — the desktop app's local backend (API on :8000)
+uvicorn prash.server:app --host 0.0.0.0 --port 8000
+
+# terminal 2 — the premium UI (on :1420, proxies /api + /ws to :8000)
+cd desktop && npm install && npm run dev             # Node 18+
+```
+
+Open **http://localhost:1420** — the onboarding wizard takes it from there.
+The `prash` CLI (`prash repl`, `prash tui`, `prash watch`, …) works from the
+same install — see [The commands](#the-commands). A ready-made download of this
+exact tree is also attached to releases as `lear-premium-ui-full.zip`.
+
+---
+
 ## Setup
 
 Requires **Python 3.10+**. Takes about two minutes.
